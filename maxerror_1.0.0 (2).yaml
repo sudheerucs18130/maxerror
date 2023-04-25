@@ -1,0 +1,497 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: maxError
+  x-ibm-name: maxerror
+x-ibm-configuration:
+  properties:
+    target-url:
+      value: https://www.example.com
+      description: URL of the proxy policy
+      encoded: false
+  cors:
+    enabled: true
+  gateway: datapower-api-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: request.headers.ID = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://api.agify.io?name=meelad
+            - condition: request.headers.SR = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://dog.ceo/api/breeds/image/random
+            - condition: request.headers.SE = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://official-joke-api.appspot.com/random_joke
+      - parse:
+          version: 2.1.0
+          title: parse
+          parse-settings-reference:
+            default: apic-default-parsesettings
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: request.headers.json = "true"
+              execute:
+                - json-to-xml:
+                    version: 2.0.0
+                    title: json-to-xml
+                    root-element-name: json
+                    always-output-root-element: false
+                    unnamed-element-name: element
+                    conversionType: relaxed-badgerfish
+            - condition: request.headers.xml = "true"
+              execute:
+                - xml-to-json:
+                    version: 2.0.0
+                    title: xml-to-json
+      - parse:
+          version: 2.1.0
+          title: parse
+          parse-settings-reference:
+            default: apic-default-parsesettings
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: request.headers.ide = "true"
+              execute:
+                - invoke:
+                    title: invoke
+                    version: 2.0.0
+                    verb: keep
+                    target-url: https://www.google.com/xyz
+                    follow-redirects: false
+                    timeout: 60
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    header-control:
+                      type: blocklist
+                      values: []
+                    inject-proxy-headers: true
+                    persistent-connection: true
+                    backend-type: detect
+                    graphql-send-type: detect
+                    output: errorResponse
+                - throw:
+                    version: 2.1.0
+                    title: throw
+                    name: internalServerError
+                    error-status-code: '500'
+            - condition: request.headers.SET = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://www.google.com/xyz
+                - throw:
+                    version: 2.1.0
+                    title: throw
+                    name: badRequest
+                    error-status-code: '404'
+      - parse:
+          version: 2.1.0
+          title: parse
+          parse-settings-reference:
+            default: apic-default-parsesettings
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: request.headers.LPA = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://www.google.com/xyz
+                - throw:
+                    version: 2.1.0
+                    title: throw
+                    name: InternalServerError
+                    error-status-code: '500'
+            - condition: request.headers.FRI = "true"
+              execute:
+                - invoke:
+                    version: 2.2.0
+                    title: invoke
+                    backend-type: detect
+                    header-control:
+                      type: blocklist
+                      values: []
+                    parameter-control:
+                      type: allowlist
+                      values: []
+                    http-version: HTTP/1.1
+                    timeout: 60
+                    verb: keep
+                    chunked-uploads: true
+                    persistent-connection: true
+                    cache-response: protocol
+                    cache-ttl: 900
+                    stop-on-error: []
+                    graphql-send-type: detect
+                    websocket-upgrade: false
+                    target-url: https://www.google.com/xyz
+                - throw:
+                    version: 2.1.0
+                    title: throw
+                    name: BadRequest
+                    error-status-code: '404'
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: 'true'
+              execute:
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "var apim = require('apim');\r\n\r\nvar reqBody = apim.getvariable('request.body');\r\n\r\n/*reqBody.name = \"Modified\";\r\nsession.output.write(reqBody);\r\napim.output('application/json');*/\r\n\r\ntry {\r\n    \r\n    //if (!reqBody.name)\r\n        //throw \"nameEmptyError\";\r\n    if (Number.isInteger(reqBody.name))\r\n        throw \"NameNANError\";\r\n    else if(reqBody.name.trim() == \"\")\r\n        throw \"NameError\";\r\n    //if(isNaN(reqBody.name)) \r\n        //throw \"StringError\";\r\n    //if(!reqBody.n//if (!reqBody.age && reqBody.age !== 0)\r\n       //throw \"ageEmptyError\";\r\n    if (isNaN(reqBody.age))\r\n        throw \"ageNaNError\";\r\n    if (Number.isString(reqBody.age))\r\n        throw \"AgeError\";\r\n    //else if(reqBody.age.trim() == \"\")\r\n        //throw \"AgetrimError\";\r\n    //if ((reqBody.name) instanceof SyntaxError)\r\n        //throw \"SyntaxError\";\r\n    //var  requestBody = JSON.parse(request.data);\r\n    //if(!requestBody.name)\r\n    //if (request.hasOwnProperty('name == null or empty'))\r\n        //throw new error (\"NameFieldError\")\r\n     //if(!requestBody.age)\r\n        //throw new error (\"AgeFieldError\")\r\n     //if (request.hasOwnProperty('age == null or empty'))\r\n        //throw new error (\"AgeFieldError\")\r\n}\r\n\r\ncatch (err) {\r\n  //if (err == \"nameEmptyError\")\r\n    //session.output.write('{\"errorMessage\": \"Name cannot be null or empty\"}');\r\n  if (err == \"NameNANError\")\r\n    session.output.write('{\"errorMessage\": \"Name must be a String\"}');\r\n  if (err == \"NameError\")\r\n    session.output.write('{\"errorMessage\": \"Name could not be Empty\"}');\r\n   if (err == \"StringError\")\r\n    session.output.write('{\"errorMessage\": \" name could not be a number\"}');\r\n  //if (err == \"NameFieldError\")\r\n    //session.output.write('{\"errorMessage\": \"Name Field Missing\"}');\r\n  if (err == \"ageEmptyError\")\r\n    session.output.write('{\"errorMessage\": \"Age cannot be null or empty\"}');\r\n  if (err == \"ageNaNError\")\r\n    session.output.write('{\"errorMessage\": \"Age must be a number\"}');\r\n  //if (err == \"ageError\")\r\n    //session.output.write('{\"errorMessage\": \"Age could not be string\"}');\r\n    if (err == \"AgetrimError\")\r\n      session.output.write('{\"errorMessage\": \"Age could not be Empty\"}');\r\n  //if(err == \"SyntaxError\")\r\n    //session.output.write('{\"errorMessage\": \"Requested body contain SyntaxError\"}');\r\n\r\n    //pm.response.sendError(400, error.Message);\r\n    //session.output.write('{\"errorMessage\": \"missing name field\"}');\r\n  //if (err == \"AgeFieldError\")\r\n  //if name field exists, continue with the request\r\n   // pm.response.sendError(400, error.Message);\r\n   // session.output.write('{\"errorMessage\": \"missing age field\"}');\r\n  \r\n  \r\n    //session.output.write('<root><errorMessage>Age must be a number</errorMessage></root>');\r\n\r\n  apim.output('application/json');\r\n  //apim.output('application/xml');\r\n  //apim.setvariable('message.status.code', 200);\r\n  apim.setvariable('message.status.code', 400);\r\n  //apim.setvariable('message.status.code', 500);\r\n\r\n}"
+            - condition: 'true'
+              execute:
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "var apim = require('apim');\r\n\r\nvar reqBody = apim.getvariable('request.body');\r\n\r\n/*reqBody.name = \"Modified\";\r\nsession.output.write(reqBody);\r\napim.output('application/json');*/\r\n\r\nif (request.method === 'POST')\r\ntry {\r\n    \r\n   \r\n    if (reqBody.name == err instanceof SyntaxError)\r\n     requestBody = JSON.parse(request.body);\r\n    // do something with the request body\r\n    response.send({ message: 'Request processed successfully' });\r\n        throw \"SyntaxError\";\r\n   \r\n}\r\n\r\ncatch (err) {\r\n  //if (err == \"nameEmptyError\")\r\n    //session.output.write('{\"errorMessage\": \"Name cannot be \r\n  if(err == \"SyntaxError\")\r\n    session.output.write('{\"errorMessage\": \"Requested body contain SyntaxError\"}');\r\n    //session.output.write('<root><errorMessage>Age must be a number</errorMessage></root>');\r\n\r\n  apim.output('application/json');\r\n  //apim.output('application/xml');\r\n  //apim.setvariable('message.status.code', 200);\r\n  apim.setvariable('message.status.code', 400);\r\n  //apim.setvariable('message.status.code', 500);\r\n\r\n}"
+                - throw:
+                    version: 2.1.0
+                    title: throw
+                    name: badrequest
+                    error-status-code: '400'
+            - condition: request.headers.errors = "true"
+              execute:
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "var apim = require('apim');\r\n\r\nvar reqHead = apim.getvariable('request.headers');\r\n//var b = valueOf(x-ibm-client-id);\r\ntry {\r\n    \r\n    if (reqHead.client!== '1234' || reqHead.secret!=='1234')\r\n        throw \"UnauthorisedError\";\r\n\r\n        \r\n}\r\ncatch (err) {\r\n  if (err == \"UnauthorisedError\")\r\n    session.output.write('{\"errorMessage\": \"client id or secret is wrong \"}');\r\n    //if (err == \"EmptyErrorError\")\r\n    //session.output.write('{\"errorMessage\": \"client id is missing \"}');\r\n    \r\n    \r\napim.output('application/json');\r\n  //apim.output('application/xml');\r\napim.setvariable('message.status.code', 401);\r\n}"
+      - switch:
+          version: 2.0.0
+          title: switch
+          case:
+            - condition: request.headers.CALL="true"
+              execute:
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "var apim = require('apim');\r\n\r\nvar reqHead = apim.getvariable('request.headers');\r\n//var b = valueOf(x-ibm-client-id);\r\ntry {\r\n    \r\n    if (reqHead.client!== '1234' || reqHead.secret!=='1234')\r\n        throw \"UnauthorisedError\";\r\n\r\n        \r\n}\r\ncatch (err) {\r\n  if (err == \"UnauthorisedError\")\r\n    session.output.write('{\"errorMessage\": \"client id or secret is wrong \"}');\r\n    //if (err == \"EmptyErrorError\")\r\n    //session.output.write('{\"errorMessage\": \"client id is missing \"}');\r\n    \r\n    \r\n//apim.output('application/json');\r\napim.output('application/xml');\r\napim.setvariable('message.status.code', 401);\r\n}"
+    finally: []
+    catch:
+      - errors:
+          - internalServerError
+        execute:
+          - map:
+              version: 2.0.0
+              title: map
+              inputs:
+                input:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      httpCode:
+                        type: string
+                        name: httpCode
+                      httpMessage:
+                        type: string
+                        name: httpMessage
+                      moreInformation:
+                        type: string
+                        name: moreInformation
+                    example: >-
+                      {"httpCode":"500","httpMessage":"URL Open
+                      error","moreInformation":"Could not connect to endpoint"}
+                  variable: errorResponse.body
+                  content: application/json
+              outputs:
+                output:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      root:
+                        type: object
+                        properties:
+                          errorMessage:
+                            type: string
+                            name: errorMessage
+                        xml:
+                          namespace: ''
+                        name: root
+                    xml:
+                      namespace: ''
+                    example: |-
+                      <root>
+                          <errorMessage>Server cannot be reached</errorMessage>
+                      </root>
+                  variable: message.body
+                  content: application/xml
+                output_1:
+                  schema:
+                    type: string
+                  variable: message.status.code
+              actions:
+                - set: output.root.errorMessage
+                  default: server cannot be reached
+                - set: output_1
+                  default: '500'
+      - errors:
+          - badRequest
+        execute:
+          - map:
+              version: 2.0.0
+              title: map
+              inputs: {}
+              outputs:
+                output:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      root:
+                        type: object
+                        properties:
+                          errorMessage:
+                            type: string
+                            name: errorMessage
+                        xml:
+                          namespace: ''
+                        name: root
+                    xml:
+                      namespace: ''
+                    example: |-
+                      <root>
+                          <errorMessage>Not Found</errorMessage>
+                      </root>
+                  variable: message.body
+                  content: application/xml
+                output_1:
+                  schema:
+                    type: string
+                  variable: message.status.code
+              actions:
+                - set: output.root.errorMessage
+                  default: Not Found
+                - set: output_1
+                  default: '404'
+      - errors:
+          - InternalServerError
+        execute:
+          - map:
+              version: 2.0.0
+              title: map
+              inputs: {}
+              outputs:
+                output:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      errorMessage:
+                        type: string
+                        name: errorMessage
+                    example: '{"errorMessage":"server cannot be reached"}'
+                  variable: message.body
+                  content: application/json
+                output_1:
+                  schema:
+                    type: string
+                  variable: message.status.code
+              actions:
+                - set: output.errorMessage
+                  default: server cannot be reached
+                - set: output_1
+                  default: '500'
+      - errors:
+          - BadRequest
+        execute:
+          - map:
+              version: 2.0.0
+              title: map
+              inputs: {}
+              outputs:
+                output:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      errorMessage:
+                        type: string
+                        name: errorMessage
+                    example: '{"errorMessage":"Not found"}'
+                  variable: message.body
+                  content: application/json
+                output_1:
+                  schema:
+                    type: string
+                  variable: message.status.code
+              actions:
+                - set: output.errorMessage
+                  default: Not found
+                - set: output_1
+                  default: '404'
+      - errors:
+          - badrequest
+        execute:
+          - map:
+              version: 2.0.0
+              title: map
+              inputs: {}
+              outputs:
+                output:
+                  schema:
+                    description: ''
+                    type: object
+                    properties:
+                      errorMessage:
+                        type: string
+                        name: errorMessage
+                    example: '{"errorMessage":"SyntaxError"}'
+                  variable: message.body
+                output_1:
+                  schema:
+                    type: string
+                  variable: message.status.code
+              actions:
+                - set: output.errorMessage
+                  default: SyntaxError
+                - set: output_1
+                  default: '400'
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+paths:
+  /error-1:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    post:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+securityDefinitions:
+  clientID:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientID: []
+schemes:
+  - https
+  - http
+responses: {}
+definitions: {}
+basePath: /error
